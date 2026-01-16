@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  /* Custom colors */
+  --color-mustard-100: #FFF8E7;
+  --color-mustard-500: #D4A017;
+  --color-burgundy-500: #722F37;
+  --color-lime-400: #A3E635;
+  --color-lime-700: #4D7C0F;
+  --color-navy-400: #1E3A5F;
+  --color-black-800: #1F1F1F;
+  --color-black-900: #0A0A0A;
+
+  /* Custom fonts - using system fonts as fallbacks */
+  --font-latinRoman: Georgia, "Times New Roman", serif;
+  --font-latinRomanCaps: Georgia, "Times New Roman", serif;
+  --font-latinRomanDunhillOblique: Georgia, "Times New Roman", serif;
+  --font-latinMonoCaps: Monaco, Consolas, monospace;
+  --font-latinMonoRegular: Monaco, Consolas, monospace;
+  --font-latinMonoCondOblique: Monaco, Consolas, monospace;
+}
