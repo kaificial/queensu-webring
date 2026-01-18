@@ -1,0 +1,26 @@
+{
+  "name": "main-webring",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css",
+    "watch:css": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QU-Webring/MAIN-Webring.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QU-Webring/MAIN-Webring/issues"
+  },
+  "homepage": "https://github.com/QU-Webring/MAIN-Webring#readme",
+  "description": "",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "tailwindcss": "^4.1.18"
+  }
+}

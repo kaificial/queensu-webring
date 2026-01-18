@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="./css/output.css" rel="stylesheet" />
+
+  <!-- prevent visible alpinejs page reloading -->
+  <style>
+    [x-cloak] {
+      display: none;
+    }
+  </style>
+
+  <!-- SEO Meta Tags -->
+  <title>CS Webring</title>
+  <meta name="description" content="A webring for Computer Science students and alumni at the University of Waterloo.">
+  <meta name="keywords" content="webring, UWaterloo, Computer Science, CS, personal websites, student portfolio">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cs.uwatering.com/">
+  <meta property="og:title" content="CS Webring">
+  <meta property="og:description"
+    content="A webring for Computer Science students and alumni at the University of Waterloo.">
+  <meta property="og:image" content="https://cs.uwatering.com/webAssets/og.png">
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://cs.uwatering.com/">
+  <meta property="twitter:title" content="CS Webring">
+  <meta property="twitter:description"
+    content="A webring for Computer Science students and alumni at the University of Waterloo.">
+  <meta property="twitter:image" content="https://cs.uwatering.com/webAssets/og.png">
+
+  <!-- Favicon (add your own favicon later) -->
+  <!-- <link rel="icon" type="image/x-icon" href="../webAssets/favicon.ico"> -->
+
+  <!-- JS sources -->
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <!-- Get program from URL hash -->
+  <script type="module">
+    console.log("Full URL:", window.location.href);
+    console.log("Hash:", window.location.hash);
+    
+    const program = window.location.hash.slice(1) || "cs";
+    console.log("Loading program:", program);
+
+    try {
+      const response = await fetch(`./sites/${program}.json`);
+      console.log("Fetch response:", response.status, response.ok);
+      if (!response.ok) throw new Error(`Failed to load ${program}.json`);
+      const sites = await response.json();
+      console.log("Loaded sites:", sites);
+
+      window.webringData = { sites: sites };
+      console.log("webringData set:", window.webringData);
+
+      await import("./js/script.js");
+      console.log("script.js imported");
+    } catch (error) {
+      console.error("Error loading webring data:", error);
+      document.getElementById("webring-list").innerHTML =
+        `<p class="text-burgundy-500">Failed to load webring data for "${program}"</p>`;
+    }
+  </script>
+</head>
+
+<body class="bg-mustard-100">
+  <main class=" text-black-900 px-2 py-6 sm:p-6 sm:min-h-[100vh] sm:w-[100vw] overflow-x-hidden">
+    <header class="hidden sm:block">
+      <h1 class="text-2xl font-latinRomanCaps text-black-900">Math Webring</h1>
+    </header>
+    <div class="sm:hidden fixed top-6 left-0 w-full px-2">
+      <input type="text" id="search-mobile" placeholder="Search by name, year or url..."
+        class=" w-full font-latinMonoCaps px-4 py-2 border border-lime-700 rounded-none" />
+    </div>
+    <div class="w-full sm:w-3/5 lg:w-2/5">
+      <p class="hidden sm:block font-latinRoman mt-10 leading-tight">
+        Welcome to the official webring of students studying CS at the
+        <a class="text-mustard-500 underline" href="https://uwaterloo.ca/" target="_blank">University of Waterloo</a>
+        in Ontario, Canada. This is an ongoing project to document one of the most talented student bodies in the world,
+        all while making them more visible to the public.
+      </p>
+      <p class="hidden sm:block font-latinRoman mt-4 leading-tight">
+        If you're one of us, we welcome you with open arms
+        (or in this case, open
+        <a class="text-mustard-500 underline" href="https://github.com/JusGu/uwatering">open PRs</a>).
+      </p>
+      <div>
+        <div class="grid grid-cols-12 sm:grid-cols-6 gap-3 sm:gap-6 mb-6 mt-16">
+          <span
+            class="col-span-5 sm:col-span-3 text-left font-latinRomanDunhillOblique text-burgundy-500 text-lg italic">NAME</span>
+          <span
+            class="col-span-2 sm:col-span-1 text-right font-latinRomanDunhillOblique text-burgundy-500 text-lg italic">YEAR</span>
+          <span
+            class="col-span-5 sm:col-span-2 text-left font-latinRomanDunhillOblique text-burgundy-500 text-lg italic">URL</span>
+        </div>
+        <div class="w-full flex-flex-col space-y-1 text-sm sm:text-base mb-24 sm:mb-0" id="webring-list">
+        </div>
+      </div>
+    </div>
+
+    <footer x-data="{ open: true }"
+      class="fixed bottom-0 left-0 w-full sm:hidden bg-white border-t border-black-800 pt-4 pb-3 px-2">
+      <div @click="open = ! open" class="flex justify-between">
+        <button class="font-latinMonoRegular text-black-900 flex space-x-2 items-center">
+          <span x-text="open ? '[-]' : '[+]'"></span>
+          <span x-text="open ? 'CLOSE' : 'MORE INFO'"></span>
+        </button>
+        <div class="flex space-x-4 leading-none">
+          <a href="https://en.wikipedia.org/wiki/Webring"
+            class="font-latinMonoCondOblique text-lime-700 underline italic">what's a webring?</a>
+          <a href="https://github.com/JusGu/uwatering?tab=readme-ov-file#join-the-webring"
+            class="font-latinMonoCondOblique text-lime-700 underline italic">how can i join?</a>
+        </div>
+      </div>
+
+      <div x-show="open" class="w-full mt-8 mb-6">
+        <p class="w-full font-latinMonoRegular leading-none">
+          We are computer science students and alumni studying at the <a class="text-mustard-500 underline"
+            href="https://uwaterloo.ca/">University of
+            Waterloo</a> in Ontario, Canada. If you're one of us, we welcome you with open arms. (Or in this case, open
+          <a class="text-mustard-500 underline" href="https://github.com/JusGu/uwatering">open PRs</a>).
+        </p>
+        <div id="webring-chart-mobile" class="w-full border border-black-900 mt-4">
+          <div id="chart-container-mobile" class="h-[12rem]"></div>
+        </div>
+      </div>
+
+      <span class="mt-2 font-latinRomanCaps text-black-900">Math Webring</span>
+    </footer>
+  </main>
+</body>
+
+</html>
