@@ -50,6 +50,17 @@
       scrollbar-width: thin;
       scrollbar-color: #444444 #1a1a1a;
     }
+    #webring-logo {
+      width: 64px !important;
+      height: 64px !important;
+      display: block !important;
+    }
+    #webring-logo canvas {
+      width: 64px !important;
+      height: 64px !important;
+      max-width: 64px !important;
+      max-height: 64px !important;
+    }
     .text-info-grey {
       color: #b8b8b8;
     }
@@ -78,6 +89,13 @@
   <!-- JS sources -->
   <script src="//unpkg.com/alpinejs" defer></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js"
+      }
+    }
+  </script>
 
   <!-- Get program from URL hash -->
   <script type="module">
@@ -90,7 +108,20 @@
 
       window.webringData = { sites: sites };
 
+      // Set data-model before loading three-scene.js
+      const logo = document.getElementById("webring-logo");
+      if (logo) {
+        logo.setAttribute("data-model", `./assets/model/${program}_webring_logo.gltf`);
+      }
+
       await import("./js/script.js");
+
+      // Wait for layout to complete before initializing Three.js
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          import("./js/three-scene.js");
+        });
+      });
     } catch (error) {
       console.error("Error loading webring data:", error);
       document.getElementById("webring-list").innerHTML =
@@ -99,16 +130,17 @@
   </script>
 </head>
 
-<body style="background-color: #000000; color: #ffffff; font-family: monospace;">
+<body style="background-color: #0c0c0c; color: #e6e6e6; font-family: monospace;">
   <main class="text-white px-4 py-6 sm:p-6 w-full flex flex-col items-center" style="height: 100vh; overflow: hidden;">
 
     <hr class="divider w-full sm:w-3/5 lg:w-2/5">
 
     <div class="w-full sm:w-3/5 lg:w-2/5 mx-auto" style="flex-shrink: 0;">
       <div class="flex flex-row justify-between items-center w-full">
-        <div class="flex flex-row items-center gap-2">
+        <div class="flex flex-row items-center">
           <img src="" alt="Logo" class="rounded-full" id="webring-logo" style="width: 4rem; height: 4rem;">
-          <h1 class="text-2xl font-monospace font-bold text-white" id="webring-title">QUEENSU WEBRING</h1>
+          <!-- <span aria-hidden="true" data-qmodel="logo" data-model="" id="webring-logo" data-edge-angle="10" style="display: block; overflow: hidden; flex-shrink: 0;"></span> -->
+          <h1 class="text-2xl font-monospace font-bold text-white" id="webring-title">QUEENSU-WEBRING</h1>
         </div>
         <button onclick="window.location.href = 'index.html'" class="text-2xl font-monospace font-bold text-white whitespace-nowrap" style="cursor: pointer;">←BACK</button>
       </div>

@@ -128,6 +128,7 @@ function init() {
   const logo = document.getElementById("webring-logo");
   if (logo) {
     logo.src = `./assets/icons/${program}/icon-white.png`;
+    // logo.setAttribute("data-model", `./assets/model/${program}_webring_logo.gltf`);
   }
 
   const info = document.getElementById("webring-info");
