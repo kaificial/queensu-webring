@@ -309,7 +309,33 @@ h1 {
     margin: 0 auto 1.25rem;
 }
 
-a:hover {
+a:hover,
+.btn-hover:hover {
     background: #e6e6e6;
     color: #0c0c0c;
+}
+
+.btn-hover {
+    transition: all 0.2s;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+::-webkit-scrollbar-thumb {
+    background: #444444;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #666666;
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #444444 #1a1a1a;
 }

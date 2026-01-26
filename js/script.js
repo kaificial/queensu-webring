@@ -44,7 +44,7 @@ let createWebringList = (matchedSiteIndices) => {
     if (isSearchItem) {
       link.className += " text-mustard-100"
     } else {
-      link.className += " text-mustard-500"
+      link.className += " text-info-grey"
     }
 
     const spacer = document.createElement("span");
