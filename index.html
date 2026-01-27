@@ -21,13 +21,14 @@
 
             <div class="hero-card hero-above-fold">
                 <h1 id="hero-title">QUEENSU-WEBRING</h1>
-                <p class="intro">Welcome to the official webring for Queen's University students!</p>
+                <p class="intro">Welcome to the official webring for Queen's University students and Alumni!</p>
                 <hr class="divider">
                 <div id="three-container" class="three-container" aria-hidden="true" data-qmodel="hero" data-edge-angle="10"></div>
                 <div class="hero-actions" aria-label="Webring links">
-                    <a class="hero-button" href="https://github.com/AaronSu06/QU-Webring" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="hero-button" href="mailto:queenswebring@gmail.com">Email</a>
-                </div>
+                    <a class="hero-button" href="https://github.com/AaronSu06/queensu-webring" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a class="hero-button" href="mailto:queenswebring@gmail.com">Contact</a>
+                    <a class="hero-button" onclick="fetch('sites/cs.json').then(r=>r.json()).then(cs=>fetch('sites/artsci.json').then(r=>r.json()).then(artsci=>fetch('sites/eng.json').then(r=>r.json()).then(eng=>fetch('sites/bcom.json').then(r=>r.json()).then(bcom=>{const all=[...cs,...artsci,...eng,...bcom].filter(s=>s.website);if(all.length)window.location.href=all[Math.floor(Math.random()*all.length)].website}))))" style="cursor:pointer">Random</a>
+                </div>  
                 <hr class="divider">
                 <p class="intro webring-intro">Select a program-specific webring to explore student websites!</p>
 
@@ -52,11 +53,11 @@
 
                 <hr class="divider">
 
-                <h2 id="about-title">What is a Webring?</h2>
+                <h2 id="about-title">About the QueensU Webring</h2>
                 <hr class="divider">
                 <section class="section" id="about" aria-labelledby="about-title">
-                    <p>The QueensU Webring connects student-built sites into one shared network. It helps visitors discover projects, portfolios, and stories from across the Queens community.</p>
-                    <p>Each ring links out to individual sites while making it easy to hop between them. This keeps student work visible and encourages collaboration.</p>
+                    <p>The QueensU Webring connects student-built sites into one shared network, making it easy to discover projects, portfolios, and stories from across the Queen's community.</p>
+                    <p>Each site links to the next, keeping student work visible and encouraging collaboration.</p>
                 </section>
 
                 <hr class="divider">

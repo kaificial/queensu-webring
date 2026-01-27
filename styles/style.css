@@ -46,20 +46,21 @@ body.home-page {
     width: clamp(240px, 55vmin, 420px);
     height: auto;
     aspect-ratio: 1 / 1;
-    margin: var(--space-2) auto;
+    margin: var(--space-1) auto;
     z-index: 1;
 }
 
 .home-page .hero-actions {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: var(--space-2);
-    width: min(360px, 90vw);
+    width: 100%;
     margin: 0 auto;
 }
 
 .home-page .hero-button {
+    flex: 1 1 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -71,7 +72,6 @@ body.home-page {
     letter-spacing: 0.04em;
     background: transparent;
     transition: background 0.2s, color 0.2s, transform 0.2s;
-    flex: 1 1 140px;
 }
 
 .home-page .hero-button:hover,
