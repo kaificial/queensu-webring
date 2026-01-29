@@ -1,13 +1,18 @@
 [
     {
+        "name": "Techmeng Aing",
+        "year": 2028,
+        "website": "https://tmsv.dev/"
+    }
+    {
         "name": "Aaron Su",
-        "year": 2029,
+        "year": 2028,
         "website": "https://aaronsu.vercel.app/"
     },
 
     {
         "name": "Kevin Phan",
-        "year": 2029,
+        "year": 2028,
         "website": "https://kevinphan.vercel.app/"
     }
 ]
