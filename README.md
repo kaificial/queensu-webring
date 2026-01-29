@@ -1,10 +1,10 @@
-# QueensU-Webring
+# QUEENSU-WEBRING
 A webring connecting students and alumni at Queen's University in Kingston, Ontario.
 
 **[Visit the live webring](https://queensu-webring.ca)** | **[How to join](#joining)** | **[Widget examples](#widget-examples)**
 
 ## What is a webring?
-Webrings are collections of personal websites connected in a ring structure, allowing visitors to discover new sites by navigating between them. Popular in the early web, they're making a comeback as a way to build community and make personal sites more discoverable. The QueensU Webring brings together current students and alumni to showcase their portfolios, projects, and personal spaces on the web.
+Webrings are collections of personal websites connected in a ring structure, making personal sites more discoverable while building community. The Queen's Webring brings together current students and alumni to showcase their portfolios, projects, and personal spaces on the web.
 
 ## Joining
 **Eligibility:** Current students or alumni of a recognized program at Queen's University (Kingston, ON, Canada).
@@ -24,7 +24,7 @@ Webrings are collections of personal websites connected in a ring structure, all
 Your PR will be reviewed and merged if you meet the eligibility requirements and your site contains no inappropriate content.
 
 ## Widget Examples
-Every personal site is unique, so feel free to customize the widget to match your design! Here are starter templates using the white icon:
+Below is a starter template using the white icon for Computing students. Each program has slight variations of this template:
 
 ### HTML
 ```html
@@ -72,7 +72,7 @@ This project takes heavy inspiration from the webrings:
 - **[UW SE Webring](https://se-webring.xyz)**
 - **[UofT SKULE™ WebRing](https://webring.skule.ca/)**
   
-Without them, this project would not have been possible!
+Without them, this project would not have been made possible!
 
 ---
 
