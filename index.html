@@ -16,6 +16,7 @@
 
       if (rings.includes(hash.split('?')[0])) return;
 
+      window.__webringNavigating = true;
       document.documentElement.style.visibility = 'hidden';
 
       var parts = hash.split('?');
@@ -48,9 +49,9 @@
             var increment = navTrimmed === 'next' ? 1 : -1;
             var newIndex = (index + increment) % ring.sites.length;
             if (newIndex < 0) newIndex = ring.sites.length - 1;
-            window.location.href = ring.sites[newIndex].website;
+            window.location.replace(ring.sites[newIndex].website);
           } else {
-            window.location.href = 'webrings.html#' + ring.ring;
+            window.location.replace('webrings.html#' + ring.ring);
           }
           return;
         }
@@ -135,6 +136,10 @@
         </section>
         <hr class="divider">
     </main>
-    <script type="module" src="js/three-scene.js"></script>
+    <script type="module">
+      if (!window.__webringNavigating) {
+        import('./js/three-scene.js');
+      }
+    </script>
 </body>
 </html>

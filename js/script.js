@@ -111,7 +111,8 @@ let navigateWebring = () => {
     <p class="font-latinMonoCondOblique">redirecting...</p>
   </main>
   `;
-  window.location.href = window.webringData.sites[newIndex].website;
+  window.__webringNavigating = true;
+  window.location.replace(window.webringData.sites[newIndex].website);
 };
 
 function init() {

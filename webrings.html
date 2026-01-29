@@ -103,12 +103,14 @@
 
       await import("./js/script.js");
 
-      // Wait for layout to complete before initializing Three.js
-      requestAnimationFrame(() => {
+      // Skip Three.js if navigateWebring() triggered a redirect
+      if (!window.__webringNavigating) {
         requestAnimationFrame(() => {
-          import("./js/three-scene.js");
+          requestAnimationFrame(() => {
+            import("./js/three-scene.js");
+          });
         });
-      });
+      }
     } catch (error) {
       console.error("Error loading webring data:", error);
       document.getElementById("webring-list").innerHTML =
