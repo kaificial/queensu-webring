@@ -39,6 +39,8 @@ if (containers.length) {
   };
 
   const scenes = [];
+  let animationFrameId = null;
+  const clock = new THREE.Clock();
 
   const initScene = async (container) => {
     const modelType = container.dataset.qmodel || "hero";
@@ -147,6 +149,7 @@ if (containers.length) {
       camera,
       modelGroup,
       resize,
+      lineMaterial,
     });
   };
 
@@ -156,18 +159,79 @@ if (containers.length) {
     });
   });
 
-  const clock = new THREE.Clock();
   const animate = () => {
     const elapsed = clock.getElapsedTime();
     scenes.forEach((entry) => {
       entry.modelGroup.rotation.y = elapsed * 0.45;
       entry.renderer.render(entry.scene, entry.camera);
     });
-    requestAnimationFrame(animate);
+    animationFrameId = requestAnimationFrame(animate);
   };
 
-  animate();
-  window.addEventListener("resize", () => {
+  const handleResize = () => {
     scenes.forEach((entry) => entry.resize());
+  };
+
+  // Cleanup function to dispose all Three.js resources
+  const cleanup = () => {
+    // Cancel animation loop
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    }
+
+    // Remove event listeners
+    window.removeEventListener("resize", handleResize);
+
+    // Dispose each scene's resources
+    scenes.forEach((entry) => {
+      // Dispose renderer and release WebGL context
+      entry.renderer.dispose();
+      entry.renderer.forceContextLoss();
+
+      // Dispose line material
+      if (entry.lineMaterial) {
+        entry.lineMaterial.dispose();
+      }
+
+      // Traverse scene and dispose all geometries and materials
+      entry.scene.traverse((obj) => {
+        if (obj.geometry) {
+          obj.geometry.dispose();
+        }
+        if (obj.material) {
+          if (Array.isArray(obj.material)) {
+            obj.material.forEach((m) => m.dispose());
+          } else {
+            obj.material.dispose();
+          }
+        }
+      });
+    });
+
+    // Clear the scenes array
+    scenes.length = 0;
+
+    // Clear model cache
+    modelCache.clear();
+  };
+
+  // Pause animation when page is hidden (BFCache, tab switch)
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+    } else if (scenes.length > 0 && !animationFrameId) {
+      animate();
+    }
   });
+
+  // Full cleanup when page is unloaded or entering BFCache
+  window.addEventListener("pagehide", cleanup);
+
+  // Start animation and resize listener
+  animate();
+  window.addEventListener("resize", handleResize);
 }
